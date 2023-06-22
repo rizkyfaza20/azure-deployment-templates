@@ -10,12 +10,12 @@ jobs:
     vmImage: ubuntu-latest
 
   variables:
-  - group: <variable-group-name> #replace with your variable group name
+  - group: 'CCN Development Environment' #replace with your variable group name
 
   steps:
   - task: AzureCLI@2
     inputs:
-      azureSubscription: '<service-connection-auth>' #replace with your service connection - azure resource manager service principal
+      azureSubscription: 'CCN Development ARM Service' #replace with your service connection - azure resource manager service principal
       scriptType: 'bash'
       scriptLocation: 'inlineScript'
       inlineScript: |
@@ -23,7 +23,7 @@ jobs:
         VAULT_ID=$(az keyvault create --name "$(key_vault_name)" --resource-group "$(resource_group_name)" --location "$(az_region)" --query "id" -o tsv)
         az storage account create --resource-group $(resource_group_name) --name "$(sa_prefix)" --sku Standard_LRS --encryption-services blob
         az storage container create --name $(sa_container_name) --account-name "$(sa_prefix)" --auth-mode login
-        
+
   - task: TerraformInstaller@0
     displayName: Terraform Installation
     inputs:
@@ -33,7 +33,7 @@ jobs:
     inputs:
       provider: 'azurerm'
       command: 'init'
-      workingDirectory: '$(System.DefaultWorkingDirectory)/tf-files'
+      workingDirectory: '$(System.DefaultWorkingDirectory)/terraform_files'
       backendServiceArm: '<service-connection-auth>'
       backendAzureRmResourceGroupName: '$(resource_group_name)'
       backendAzureRmStorageAccountName: '$(sa_prefix)'
@@ -44,15 +44,13 @@ jobs:
     inputs:
       provider: 'azurerm'
       command: 'plan'
-      workingDirectory: '$(System.DefaultWorkingDirectory)/tf-files'
+      workingDirectory: '$(System.DefaultWorkingDirectory)/terraform_files'
       commandOptions: '-out=tfplan'
-      environmentServiceNameAzureRM: 'akrish-poc-sp'
 
   - task: TerraformTaskV3@3
     displayName: Terraform Apply
     inputs:
       provider: 'azurerm'
       command: 'apply'
-      workingDirectory: '$(System.DefaultWorkingDirectory)/tf-files'
+      workingDirectory: '$(System.DefaultWorkingDirectory)/terraform_files'
       commandOptions: 'tfplan'
-      environmentServiceNameAzureRM: '<service-connection-auth>'
