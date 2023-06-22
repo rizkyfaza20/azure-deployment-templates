@@ -1,8 +1,6 @@
 trigger:
 - master
 
-#variables:
-#  global_variable: value    # this is available to all jobs
 pool:
   vmImage: ubuntu-latest
 
