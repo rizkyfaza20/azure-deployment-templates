@@ -3,8 +3,8 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "aks_rg" {
-  name     = "my-aks-resource-group"
-  location = "southeastasia"
+  name     = azurerm_resource_group.aks_rg.name
+  location = azurerm_resource_group.aks_rg.location
 }
 
 resource "azurerm_kubernetes_cluster" "aks_cluster" {
