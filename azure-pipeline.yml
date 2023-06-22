@@ -34,9 +34,8 @@ jobs:
       provider: 'azurerm'
       command: 'init'
       workingDirectory: '$(System.DefaultWorkingDirectory)/terraform_files'
-      backendServiceArm: '<service-connection-auth>'
+      backendServiceArm: 'CCN Development ARM Service'
       backendAzureRmResourceGroupName: '$(resource_group_name)'
-      backendAzureRmStorageAccountName: '$(sa_prefix)'
       backendAzureRmKey: '$(tfstateFile)'
 
   - task: TerraformTaskV3@3
