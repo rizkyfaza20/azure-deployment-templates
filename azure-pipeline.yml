@@ -1,12 +1,14 @@
 trigger:
-- master
+  - master
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'ubuntu-latest'
 
   variables:
   - group: 'CCN Development Environment' #replace with your variable group name
 
+  stages:
+    displayName: 'Terraform Validate and Plan'
   steps:
   - task: AzureCLI@2
     inputs:
