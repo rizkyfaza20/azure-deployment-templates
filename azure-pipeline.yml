@@ -1,14 +1,14 @@
 trigger:
   - master
 
-pool:
-  vmImage: 'ubuntu-latest'
+jobs:
+- job: terraform_deployment
+  pool:
+    vmImage: ubuntu-latest
 
   variables:
   - group: 'CCN Development Environment' #replace with your variable group name
-
-  stages:
-    displayName: 'Terraform Validate and Plan'
+  
   steps:
   - task: AzureCLI@2
     inputs:
