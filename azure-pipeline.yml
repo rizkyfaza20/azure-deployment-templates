@@ -25,6 +25,7 @@ pool:
     displayName: Terraform Installation
     inputs:
       terraformVersion: 'latest'
+
   - task: TerraformTaskV3@3
     displayName: Terraform Init
     inputs:
@@ -36,17 +37,15 @@ pool:
       backendAzureRmKey: '$(tfstateFile)'
 
   - task: TerraformTaskV3@3
+    inputs:
+      provider: 'azurerm'
+      command: 'validate'
+      workingDirectory: '$(System.DefaultWorkingDirectory)/terraform_files'
+
+  - task: TerraformTaskV3@3
     displayName: Terraform Plan
     inputs:
       provider: 'azurerm'
       command: 'plan'
       workingDirectory: '$(System.DefaultWorkingDirectory)/terraform_files'
       commandOptions: '-out=tfplan'
-
-  - task: TerraformTaskV3@3
-    displayName: Terraform Apply
-    inputs:
-      provider: 'azurerm'
-      command: 'apply'
-      workingDirectory: '$(System.DefaultWorkingDirectory)/terraform_files'
-      commandOptions: 'tfplan'
