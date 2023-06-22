@@ -3,11 +3,8 @@ trigger:
 
 #variables:
 #  global_variable: value    # this is available to all jobs
-
-jobs:
-- job: terraform_deployment
-  pool:
-    vmImage: ubuntu-latest
+pool:
+  vmImage: ubuntu-latest
 
   variables:
   - group: 'CCN Development Environment' #replace with your variable group name
