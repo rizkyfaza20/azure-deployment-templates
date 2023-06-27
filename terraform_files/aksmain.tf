@@ -18,9 +18,9 @@ resource "azurerm_kubernetes_cluster" "aks_cluster" {
   linux_profile {
     admin_username = "aksuser"
 
-    ssh_key {
-      key_data = file("~/.ssh/id_rsa.pub")
-    }
+    # ssh_key {
+    #   key_data = file("~/.ssh/id_rsa.pub")
+    # }
   }
 
   default_node_pool {
