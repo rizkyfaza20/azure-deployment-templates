@@ -2,3 +2,5 @@
 templates/
 /template[25Apr23].json
 powershell_script_testing/
+*.hcl
+terraform_files/.terraform/

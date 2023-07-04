@@ -16,11 +16,11 @@ variable "location" {
   default     = "Southeast Asia"
 }
 
-variable "ssh_public_key" {
-  description = "The path to the SSH public key file."
-  type        = string
-  default     = "~/.ssh/id_rsa.pub"
-}
+# variable "ssh_public_key" {
+#   description = "The path to the SSH public key file."
+#   type        = string
+#   default     = "~/.ssh/id_rsa.pub"
+# }
 
 variable "node_vm_size" {
   description = "The size of the VMs in the node pool."
