@@ -4,3 +4,6 @@ templates/
 powershell_script_testing/
 *.hcl
 terraform_files/.terraform/
+terraform.tfstate
+terraform.tfstate.backup
+terraform.tfvars
